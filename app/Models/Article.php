@@ -10,4 +10,11 @@ class Article extends Model
     use HasFactory;
 
     protected $fillable=['title','excerpt','body'];
+
+    // use another function name then 'user' => use second argument in belongsTo to
+    // recognize the link between both models
+    public function author()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }
