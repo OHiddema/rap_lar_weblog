@@ -21,12 +21,21 @@ class ArticlesController extends Controller
     }
 
     public function create() {
-        return view('articles.create');
+        // return view('articles.create');
+        // include all Tag data
+        return view('articles.create',['tags' => \App\Models\Tag::all()]);
     }
 
     public function store() {
 
-        Article::create($this->validateArticle());
+        // because we have no authentication yet, we don't have an author,
+        // so we cannot use create yet, so we create author manually
+        // Article::create($this->validateArticle());
+        $article = new \App\Models\Article($this->validateArticle());
+        $article->user_id = 1;
+        $article->save();
+
+        $article->tags()->attach(request('tags'));
 
         return redirect('/articles');
     }

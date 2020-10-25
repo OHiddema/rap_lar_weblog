@@ -42,6 +42,23 @@
             @enderror
       </div>
       
+      <div class="form-group">
+         <label for="tags">Tags</label>
+         <select
+            name="tags[]"
+            id="tags"
+            class="form-control"
+            multiple
+         >
+            @foreach ($tags as $tag)
+               <option value="{{$tag->id}}">{{$tag->name}}</option>
+            @endforeach
+         </select>
+         @error('tags')
+            <p class="alert alert-danger">{{$errors->first('tags')}}</p>
+         @enderror
+      </div>
+      
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
 </div>
