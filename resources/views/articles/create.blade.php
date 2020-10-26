@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-<div class='container'>
    <h1>New Article</h1>
    <form action="/articles" method="post">
       @csrf
@@ -61,5 +60,4 @@
       
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
-</div>
 @endsection

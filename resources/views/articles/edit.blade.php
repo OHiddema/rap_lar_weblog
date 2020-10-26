@@ -1,8 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class='container'>
-   <h1>Update Article</h1>
+   <h1>Edit Article</h1>
    <form action="/articles/{{$article->id}}" method="post">
       @csrf
       @method('PUT')
@@ -66,6 +65,5 @@
 
       <button type="submit" class="btn btn-primary">Submit</button>
    </form>
-</div>
 
 @endsection

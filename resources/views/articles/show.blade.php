@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('content')
-<a href="/articles">Back to list off articles</a>
+<button><a href="/articles">Back to list off articles</a></button><br>
+<button><a href="/articles/{{$article->id}}/edit">Edit article</a></button>
 <h1>{{$article->title}}</h1>
 <p>{{$article->body}}</p>
 

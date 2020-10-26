@@ -1,7 +1,8 @@
 @extends('layout')
 
 @section('content')
-<a href="/">Home</a>
+<button><a href="/">Home</a></button><br>
+<button><a href="/articles/create">Create new article</a></button>
 <h1>All articles:</h1>
 
 @forelse ($articles as $article)
