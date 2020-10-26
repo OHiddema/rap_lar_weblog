@@ -41,12 +41,16 @@ class ArticlesController extends Controller
     }
 
     public function edit(Article $article) {
-        return view('articles.edit', compact('article'));
+        // return view('articles.edit', compact('article'));
+        return view('articles.edit', ['article' => $article, 'tags' => \App\Models\Tag::all()]);
     }
 
     public function update(Article $article) {
 
         $article->update($this->validateArticle());
+
+        $article->tags()->detach();
+        $article->tags()->attach(request('tags'));
 
         return redirect('/articles/'.$article->id);
     }
