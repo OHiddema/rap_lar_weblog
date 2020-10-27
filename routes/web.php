@@ -13,14 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-$p = 'App\\Http\\Controllers\\';
+Route::get('/', 'HomeController@index');
 
-Route::get('/', $p.'HomeController@index');
-
-Route::get('/articles', $p.'ArticlesController@index');
-Route::post('/articles', $p.'ArticlesController@store');
-Route::get('/articles/create', $p.'ArticlesController@create');
-Route::get('/articles/{article}', $p.'ArticlesController@show');
-Route::get('/articles/{article}/edit', $p.'ArticlesController@edit');
-Route::put('/articles/{article}', $p.'ArticlesController@update');
-Route::delete('/articles/{article}', $p.'ArticlesController@destroy');
+Route::get('/articles', 'ArticlesController@index');
+Route::post('/articles', 'ArticlesController@store');
+Route::get('/articles/create', 'ArticlesController@create');
+Route::get('/articles/{article}', 'ArticlesController@show');
+Route::get('/articles/{article}/edit', 'ArticlesController@edit');
+Route::put('/articles/{article}', 'ArticlesController@update');
+Route::delete('/articles/{article}', 'ArticlesController@destroy');
