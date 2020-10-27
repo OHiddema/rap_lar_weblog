@@ -3,6 +3,15 @@
 @section('content')
 <button><a href="/articles">Back to list off articles</a></button><br>
 <button><a href="/articles/{{$article->id}}/edit">Edit article</a></button>
+
+<form action="/articles/{{$article->id}}" method="POST">
+   @csrf
+   @method('DELETE')
+   <button type="submit" title="delete">
+       <i class="fas fa-trash fa-lg text-danger">Delete article</i>
+   </button>
+</form>
+
 <h1>{{$article->title}}</h1>
 <p>{{$article->body}}</p>
 

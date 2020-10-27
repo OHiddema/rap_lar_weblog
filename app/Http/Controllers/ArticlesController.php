@@ -51,6 +51,11 @@ class ArticlesController extends Controller
         return redirect('/articles/'.$article->id);
     }
 
+    public function destroy(Article $article) {
+        $article->delete();
+        return redirect('/articles');
+    }
+
     protected function validateArticle()
     {
         return request()->validate([

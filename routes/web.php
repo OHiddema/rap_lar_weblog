@@ -23,3 +23,4 @@ Route::get('/articles/create', $p.'ArticlesController@create');
 Route::get('/articles/{article}', $p.'ArticlesController@show');
 Route::get('/articles/{article}/edit', $p.'ArticlesController@edit');
 Route::put('/articles/{article}', $p.'ArticlesController@update');
+Route::delete('/articles/{article}', $p.'ArticlesController@destroy');
