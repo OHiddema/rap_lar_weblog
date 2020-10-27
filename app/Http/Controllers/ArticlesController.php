@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Article;
+use App\Models\Tag;
 
 class ArticlesController extends Controller
 {
@@ -13,7 +14,7 @@ class ArticlesController extends Controller
 
     public function index() {
         if (request('tag')) {
-            $articles = \App\Models\Tag::where('name', request('tag'))->firstOrFail()->articles;
+            $articles = Tag::where('name', request('tag'))->firstOrFail()->articles;
         } else {
             $articles = Article::latest()->get();
         }
@@ -21,7 +22,6 @@ class ArticlesController extends Controller
     }
 
     public function create() {
-        // return view('articles.create');
         // include all Tag data
         return view('articles.create',['tags' => \App\Models\Tag::all()]);
     }
@@ -31,7 +31,7 @@ class ArticlesController extends Controller
         // because we have no authentication yet, we don't have an author,
         // so we cannot use create yet, so we create author manually
         // Article::create($this->validateArticle());
-        $article = new \App\Models\Article($this->validateArticle());
+        $article = new Article($this->validateArticle());
         $article->user_id = 1;
         $article->save();
 
@@ -41,17 +41,13 @@ class ArticlesController extends Controller
     }
 
     public function edit(Article $article) {
-        // return view('articles.edit', compact('article'));
         return view('articles.edit', ['article' => $article, 'tags' => \App\Models\Tag::all()]);
     }
 
     public function update(Article $article) {
-
         $article->update($this->validateArticle());
-
         $article->tags()->detach();
         $article->tags()->attach(request('tags'));
-
         return redirect('/articles/'.$article->id);
     }
 
