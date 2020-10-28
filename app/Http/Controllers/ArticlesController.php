@@ -8,6 +8,11 @@ use App\Models\Tag;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function show(Article $article) {
         return view('articles.show', ['article'=>$article]);
     }
@@ -32,7 +37,8 @@ class ArticlesController extends Controller
         // so we cannot use create yet, so we create author manually
         // Article::create($this->validateArticle());
         $article = new Article($this->validateArticle());
-        $article->user_id = 1;
+        // $article->user_id = 1;
+        $article->user_id = auth()->user()->id;
         $article->save();
 
         $article->tags()->attach(request('tags'));

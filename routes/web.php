@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+// Route::get('/', 'HomeController@start');
+
+Route::get('/', function () {
+   return view('welcome');
+});
 
 Route::get('/articles', 'ArticlesController@index');
 Route::post('/articles', 'ArticlesController@store');
@@ -22,3 +26,6 @@ Route::get('/articles/{article}', 'ArticlesController@show');
 Route::get('/articles/{article}/edit', 'ArticlesController@edit');
 Route::put('/articles/{article}', 'ArticlesController@update');
 Route::delete('/articles/{article}', 'ArticlesController@destroy');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

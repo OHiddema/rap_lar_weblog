@@ -1,7 +1,8 @@
-@extends('layout')
+{{-- @extends('layout') --}}
+@extends('layouts.app')
 
 @section('content')
-<button><a href="/">Home</a></button><br>
+<button><a href="/home">Home</a></button><br>
 <button><a href="/articles/create">Create new article</a></button>
 <h1>All articles:</h1>
 
