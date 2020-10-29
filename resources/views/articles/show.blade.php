@@ -13,9 +13,11 @@
 </form>
 
 <h1>{{$article->title}}</h1>
+<p class="font-italic">by: {{$article->user->name}}</p> 
 <p>{{$article->body}}</p>
 
 <p>
+   tags:
    @foreach ($article->tags as $tag)
       {{-- <a href="/articles/?tag={{$tag->name}}">{{$tag->name}}</a> --}}
       <a href="/articles/?tag={{$tag->name}}">{{$tag->name}}</a>
