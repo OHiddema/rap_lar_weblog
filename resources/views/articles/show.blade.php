@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 <button><a href="/articles">Back to list off articles</a></button><br>
@@ -13,7 +13,7 @@
 </form>
 
 <h1>{{$article->title}}</h1>
-<p class="font-italic">by: {{$article->user->name}}</p> 
+<p class="font-italic">by: <a href="/articles/?user={{$article->user->id}}">{{$article->user->name}}</a></p> 
 <p>{{$article->body}}</p>
 
 <p>

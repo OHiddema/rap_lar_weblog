@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Tag;
+use App\Models\User;
 
 class ArticlesController extends Controller
 {
