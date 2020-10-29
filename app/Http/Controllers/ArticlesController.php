@@ -21,16 +21,17 @@ class ArticlesController extends Controller
     public function index() {
         if (request('tag')) {
             $articles = Tag::where('name', request('tag'))->firstOrFail()->articles;
-            $filter = 'with tag: '.request('tag');
+            $filter = "with tag: " . Tag::where('name', request('tag'))->firstOrFail()->name;
         } 
         elseif (request('user')) {
             $articles = User::where('id', request('user'))->firstOrFail()->articles;
-            $filter = 'by author: '.request('tag');
+            $filter = "by author: " . User::where('id', request('user'))->firstOrFail()->name;
         }
         else {
             $articles = Article::latest()->get();
+            $filter="";
         }
-        return view('articles.index',['articles' => $articles]);
+        return view('articles.index',['articles' => $articles, 'filter'=>$filter]);
     }
 
     public function create() {
