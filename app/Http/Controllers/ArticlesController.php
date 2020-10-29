@@ -21,7 +21,13 @@ class ArticlesController extends Controller
     public function index() {
         if (request('tag')) {
             $articles = Tag::where('name', request('tag'))->firstOrFail()->articles;
-        } else {
+            $filter = 'with tag: '.request('tag');
+        } 
+        elseif (request('user')) {
+            $articles = User::where('id', request('user'))->firstOrFail()->articles;
+            $filter = 'by author: '.request('tag');
+        }
+        else {
             $articles = Article::latest()->get();
         }
         return view('articles.index',['articles' => $articles]);
