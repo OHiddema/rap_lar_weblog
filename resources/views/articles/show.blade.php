@@ -12,15 +12,17 @@
    </button>
 </form>
 
-<h1>{{$article->title}}</h1>
-<p class="font-italic">by: <a href="/articles/?user={{$article->user->id}}">{{$article->user->name}}</a></p> 
-<p>{{$article->body}}</p>
+<div class="container rounded border mt-2" style="background-color: rgb(180, 234, 255)">
+   <h1>{{$article->title}}</h1>
+   <p class="m-0">by: <a href="/articles/?user={{$article->user->id}}">{{$article->user->name}}</a></p> 
+   <p class="m-0">
+      tags:
+      @foreach ($article->tags as $tag)
+         <a href="/articles/?tag={{$tag->name}}">{{$tag->name}}</a>
+      @endforeach
+   </p>
+   <p class="mt-2">{{$article->body}}</p>
+   
+</div>
 
-<p>
-   tags:
-   @foreach ($article->tags as $tag)
-      {{-- <a href="/articles/?tag={{$tag->name}}">{{$tag->name}}</a> --}}
-      <a href="/articles/?tag={{$tag->name}}">{{$tag->name}}</a>
-   @endforeach
-</p>
 @endsection
