@@ -29,3 +29,6 @@ Route::delete('/articles/{article}', 'ArticlesController@destroy');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/comments/{article}', 'CommentController@store');
+Route::delete('/comments/{comment}', 'CommentController@destroy');

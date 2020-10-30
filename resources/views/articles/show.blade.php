@@ -27,8 +27,35 @@
       <div class="container rounded border border-dark mt-2" style="background-color: rgb(180, 255, 199)">
       <p>{{$comment->user->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
          <p>{{$comment->body}}</p>
+
+         <form action="/comments/{{$comment->id}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" title="delete">
+                <i class="fas fa-trash fa-lg text-danger">Delete</i>
+            </button>
+         </form>
+
       </div>
    @endforeach
+
+   <form action="/comments/{{$article->id}}" method="post">
+      @csrf
+      
+      <div class="form-group">
+         <label for="body">Add comment:</label>
+         <textarea
+            name="body"
+            id="body"
+            class="form-control"
+            rows="3">{{old('body')}}</textarea>
+            @error('body')
+               <p class="alert alert-danger">{{$errors->first('body')}}</p>
+            @enderror
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
 </div>
 
 @endsection
