@@ -24,26 +24,28 @@
    <p class="mt-2">{{$article->body}}</p>
   
    @foreach ($article->comments as $comment)
-      <div class="container rounded border border-dark mt-2" style="background-color: rgb(180, 255, 199)">
-      <p>{{$comment->user->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
-         <p>{{$comment->body}}</p>
+      <div class="container rounded border border-dark mt-2 pt-1 pb-1" style="background-color: rgb(180, 255, 199)">
+         <p class="font-italic font-weight-bold">{{$comment->user->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
+            <p>{{$comment->body}}</p>
 
-         <form action="/comments/{{$comment->id}}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" title="delete">
-                <i class="fas fa-trash fa-lg text-danger">Delete</i>
-            </button>
-         </form>
+         <div class="d-inline-block">
+            <form action="/comments/{{$comment->id}}" method="POST">
+               @csrf
+               @method('DELETE')
+               <button type="submit" title="delete">
+                  <i class="fas fa-trash fa-lg text-danger">Delete</i>
+               </button>
+            </form>
+         </div>
+
          <button><a href="/comments/{{$comment->id}}/edit">Edit</a></button>
-
       </div>
    @endforeach
 
    <form action="/comments/{{$article->id}}" method="post">
       @csrf
       
-      <div class="form-group">
+      <div class="form-group mt-2">
          <label for="body">Add comment:</label>
          <textarea
             name="body"
