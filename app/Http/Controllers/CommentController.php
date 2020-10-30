@@ -27,6 +27,16 @@ class CommentController extends Controller
         return redirect('/articles/'.$comment->article->id);
     }
 
+    public function edit(Comment $comment) {
+        return view('comments.edit', ['comment' => $comment]);
+    }
+
+    public function update(Comment $comment) {
+        $comment->update($this->validateComment());
+
+        return redirect('/articles/'.$comment->article->id);
+    }
+
     protected function validateComment()
     {
         return request()->validate([

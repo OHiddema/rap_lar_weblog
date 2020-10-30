@@ -35,6 +35,7 @@
                 <i class="fas fa-trash fa-lg text-danger">Delete</i>
             </button>
          </form>
+         <button><a href="/comments/{{$comment->id}}/edit">Edit</a></button>
 
       </div>
    @endforeach
