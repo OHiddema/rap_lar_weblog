@@ -8,10 +8,10 @@ use App\Models\Article;
 
 class CommentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function destroy(Comment $comment) {
         $comment->delete();

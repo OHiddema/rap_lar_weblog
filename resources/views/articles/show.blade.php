@@ -2,15 +2,6 @@
 
 @section('content')
 <button><a href="/articles">Back to list off articles</a></button><br>
-<button><a href="/articles/{{$article->id}}/edit">Edit article</a></button>
-
-<form action="/articles/{{$article->id}}" method="POST">
-   @csrf
-   @method('DELETE')
-   <button type="submit" title="delete">
-       <i class="fas fa-trash fa-lg text-danger">Delete article</i>
-   </button>
-</form>
 
 <div class="container rounded border border-dark pb-2 mt-2" style="background-color: rgb(180, 234, 255)">
    <h1>{{$article->title}}</h1>
@@ -22,6 +13,19 @@
       @endforeach
    </p>
    <p class="mt-2">{{$article->body}}</p>
+
+   @can('full-access-article', $article)
+      <div class="d-inline-block">
+         <form action="/articles/{{$article->id}}" method="POST">
+         @csrf
+         @method('DELETE')
+         <button type="submit" title="delete">
+            <i class="fas fa-trash fa-lg text-danger">Delete</i>
+         </button>
+         </form>
+      </div>
+      <button><a href="/articles/{{$article->id}}/edit">Edit</a></button>      
+   @endcan
   
    @foreach ($article->comments as $comment)
       <div class="container rounded border border-dark mt-2 pt-1 pb-1" style="background-color: rgb(180, 255, 199)">

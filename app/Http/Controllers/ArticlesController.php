@@ -9,10 +9,10 @@ use App\Models\User;
 
 class ArticlesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function show(Article $article) {
         return view('articles.show', ['article'=>$article]);

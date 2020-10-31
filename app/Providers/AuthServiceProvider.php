@@ -25,6 +25,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('full-access-article', function(\App\Models\User $user, \App\Models\Article $article){
+            return $article->author->is($user);
+        });
     }
 }
