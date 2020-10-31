@@ -23,5 +23,5 @@
 @endsection --}}
 
 @section('content')
-<a href="/articles">Articles</a>    
+<a class="btn btn-primary" href="/articles">Articles</a>    
 @endsection

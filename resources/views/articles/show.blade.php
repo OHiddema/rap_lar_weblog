@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<button><a href="/articles">All articles</a></button><br>
+<a class="btn btn-primary" href="/articles">All articles</a><br>
 
 <div class="container rounded border border-dark pb-2 mt-2" style="background-color: rgb(180, 234, 255)">
    <h1>{{$article->title}}</h1>
@@ -15,16 +15,14 @@
    <p class="mt-2">{{$article->body}}</p>
 
    @can('update', $article)
+      <a class="btn btn-primary btn-sm" href="/articles/{{$article->id}}/edit">Edit</a>
       <div class="d-inline-block">
          <form action="/articles/{{$article->id}}" method="POST">
          @csrf
          @method('DELETE')
-         <button type="submit" title="delete">
-            <i class="fas fa-trash fa-lg text-danger">Delete</i>
-         </button>
+         <button class="btn btn-danger btn-sm" type="submit" title="delete">Delete</button>
          </form>
       </div>
-      <button><a href="/articles/{{$article->id}}/edit">Edit</a></button>      
    @endcan
   
    @foreach ($article->comments as $comment)
@@ -33,17 +31,15 @@
             <p>{{$comment->body}}</p>
 
          @can('update', $comment)
+            <a class="btn btn-primary btn-sm" href="/comments/{{$comment->id}}/edit">Edit</a>
+
             <div class="d-inline-block">
                <form action="/comments/{{$comment->id}}" method="POST">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" title="delete">
-                     <i class="fas fa-trash fa-lg text-danger">Delete</i>
-                  </button>
+                  <button class="btn btn-danger btn-sm" type="submit" title="delete">Delete</button>
                </form>
             </div>
-
-            <button><a href="/comments/{{$comment->id}}/edit">Edit</a></button>            
          @endcan
       </div>
    @endforeach
@@ -65,7 +61,9 @@
          </div>
 
          <button type="submit" class="btn btn-primary">Submit</button>
-      </form>       
+      </form>
+   @else
+      <p class="mt-2">Want to comment? <a href="/register">Register first!</a></p>
    @endauth
 </div>
 

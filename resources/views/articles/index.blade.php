@@ -3,15 +3,12 @@
 @section('content')
 <div>
     <div class="d-inline-block">
-        <button><a href="/home">Home</a></button><br>
-    </div>
-    <div class="d-inline-block">
         @auth
-            <button><a href="/articles/create">Create new article</a></button>
+            <a class="btn btn-primary" href="/articles/create">Create new article</a>
         @endauth
     </div>
     <div class="d-inline-block">
-        <button><a href="/articles">All articles</a></button><br>
+        <a class="btn btn-primary" href="/articles">All articles</a>
     </div>
 </div>
 @if ($filter=="")
@@ -26,7 +23,7 @@
         <p class="font-italic mt-0 mb-0">
             Written by: 
             <a href="/articles/?user={{$article->author->id}}">{{$article->author->name}}</a>
-            , on: {{date_format($article->created_at,"d/m/Y")}}</p> 
+            , on: {{date_format($article->created_at,"d/m/Y G:i")}}</p> 
         <p class="font-italic mt-0 mb-0">
         tags:
         @foreach ($article->tags as $tag)

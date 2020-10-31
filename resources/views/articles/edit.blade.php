@@ -63,7 +63,7 @@
             <p class="alert alert-danger">{{$errors->first('tags')}}</p>
          @enderror
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary mt-2" type="submit">Submit</button>
    </form>
 
 @endsection
