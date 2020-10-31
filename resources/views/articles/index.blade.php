@@ -1,16 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<button><a href="/home">Home</a></button><br>
-@auth
-    <button><a href="/articles/create">Create new article</a></button>
-@endauth
-<h1>All articles {{$filter}}</h1>
+<div>
+    <div class="d-inline-block">
+        <button><a href="/home">Home</a></button><br>
+    </div>
+    <div class="d-inline-block">
+        @auth
+            <button><a href="/articles/create">Create new article</a></button>
+        @endauth
+    </div>
+    <div class="d-inline-block">
+        <button><a href="/articles">All articles</a></button><br>
+    </div>
+</div>
+@if ($filter=="")
+    <h1>All articles ({{$articles->count()}})</h1>
+@else
+    <h1>{{$filter}}</h1>   
+@endif
 
 @forelse ($articles as $article)
     <div class="container rounded border border-dark m-1" style="background-color: rgb(180, 234, 255)">
         <h3><a href="/articles/{{$article->id}}">{{ $article->title}}</a></h3>
-        <p class="font-italic mt-0 mb-0">Written by: <a href="/articles/?user={{$article->author->id}}">{{$article->author->name}}</a>, on: {{date_format($article->created_at,"d/m/Y")}}</p> 
+        <p class="font-italic mt-0 mb-0">
+            Written by: 
+            <a href="/articles/?user={{$article->author->id}}">{{$article->author->name}}</a>
+            , on: {{date_format($article->created_at,"d/m/Y")}}</p> 
         <p class="font-italic mt-0 mb-0">
         tags:
         @foreach ($article->tags as $tag)

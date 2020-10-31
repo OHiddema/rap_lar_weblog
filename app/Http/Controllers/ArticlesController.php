@@ -10,7 +10,7 @@ use App\Models\User;
 class ArticlesController extends Controller
 {
     // public function __construct()
-    // {
+    // {(
     //     $this->middleware('auth');
     // }
 
@@ -20,12 +20,14 @@ class ArticlesController extends Controller
 
     public function index() {
         if (request('tag')) {
-            $articles = Tag::where('name', request('tag'))->firstOrFail()->articles;
-            $filter = "with tag: " . Tag::where('name', request('tag'))->firstOrFail()->name;
+            $tag = Tag::where('name', request('tag'))->firstOrFail();
+            $articles = $tag->articles;
+            $filter = $tag->articles->count() . " articles with tag: " . $tag->name;
         } 
         elseif (request('user')) {
-            $articles = User::where('id', request('user'))->firstOrFail()->articles;
-            $filter = "by author: " . User::where('id', request('user'))->firstOrFail()->name;
+            $user = User::where('id', request('user'))->firstOrFail();
+            $articles = $user->articles;
+            $filter = $user->articles->count() . " articles by author: " . $user->name;
         }
         else {
             $articles = Article::latest()->get();

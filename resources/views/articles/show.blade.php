@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<button><a href="/articles">Back to list off articles</a></button><br>
+<button><a href="/articles">All articles</a></button><br>
 
 <div class="container rounded border border-dark pb-2 mt-2" style="background-color: rgb(180, 234, 255)">
    <h1>{{$article->title}}</h1>
