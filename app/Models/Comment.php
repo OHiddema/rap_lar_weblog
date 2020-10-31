@@ -11,8 +11,8 @@ class Comment extends Model
 
     protected $fillable=['id','article_id','user_id','body','created_at','updated_at'];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function author() {
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function article() {

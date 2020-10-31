@@ -10,7 +10,7 @@
 @forelse ($articles as $article)
     <div class="container rounded border border-dark m-1" style="background-color: rgb(180, 234, 255)">
         <h3><a href="/articles/{{$article->id}}">{{ $article->title}}</a></h3>
-        <p class="font-italic mt-0 mb-0">Written by: <a href="/articles/?user={{$article->user->id}}">{{$article->user->name}}</a>, on: {{date_format($article->created_at,"d/m/Y")}}</p> 
+        <p class="font-italic mt-0 mb-0">Written by: <a href="/articles/?user={{$article->author->id}}">{{$article->author->name}}</a>, on: {{date_format($article->created_at,"d/m/Y")}}</p> 
         <p class="font-italic mt-0 mb-0">
         tags:
         @foreach ($article->tags as $tag)

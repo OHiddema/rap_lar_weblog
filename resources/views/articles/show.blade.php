@@ -5,7 +5,7 @@
 
 <div class="container rounded border border-dark pb-2 mt-2" style="background-color: rgb(180, 234, 255)">
    <h1>{{$article->title}}</h1>
-   <p class="m-0">by: <a href="/articles/?user={{$article->user->id}}">{{$article->user->name}}</a></p> 
+   <p class="m-0">by: <a href="/articles/?user={{$article->author->id}}">{{$article->author->name}}</a></p> 
    <p class="m-0">
       tags:
       @foreach ($article->tags as $tag)
@@ -29,7 +29,7 @@
   
    @foreach ($article->comments as $comment)
       <div class="container rounded border border-dark mt-2 pt-1 pb-1" style="background-color: rgb(180, 255, 199)">
-         <p class="font-italic font-weight-bold">{{$comment->user->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
+         <p class="font-italic font-weight-bold">{{$comment->author->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
             <p>{{$comment->body}}</p>
 
          @can('update', $comment)

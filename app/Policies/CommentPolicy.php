@@ -19,7 +19,7 @@ class CommentPolicy
      */
     public function update(User $user, Comment $comment)
     {
-        return $comment->user->is($user);
+        return $comment->author->is($user);
     }
 
     /**
