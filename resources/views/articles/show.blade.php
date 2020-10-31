@@ -32,37 +32,41 @@
          <p class="font-italic font-weight-bold">{{$comment->user->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
             <p>{{$comment->body}}</p>
 
-         <div class="d-inline-block">
-            <form action="/comments/{{$comment->id}}" method="POST">
-               @csrf
-               @method('DELETE')
-               <button type="submit" title="delete">
-                  <i class="fas fa-trash fa-lg text-danger">Delete</i>
-               </button>
-            </form>
-         </div>
+         @can('update', $comment)
+            <div class="d-inline-block">
+               <form action="/comments/{{$comment->id}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" title="delete">
+                     <i class="fas fa-trash fa-lg text-danger">Delete</i>
+                  </button>
+               </form>
+            </div>
 
-         <button><a href="/comments/{{$comment->id}}/edit">Edit</a></button>
+            <button><a href="/comments/{{$comment->id}}/edit">Edit</a></button>            
+         @endcan
       </div>
    @endforeach
 
-   <form action="/comments/{{$article->id}}" method="post">
-      @csrf
-      
-      <div class="form-group mt-2">
-         <label for="body">Add comment:</label>
-         <textarea
-            name="body"
-            id="body"
-            class="form-control"
-            rows="3">{{old('body')}}</textarea>
-            @error('body')
-               <p class="alert alert-danger">{{$errors->first('body')}}</p>
-            @enderror
-      </div>
+   @auth
+      <form action="/comments/{{$article->id}}" method="post">
+         @csrf
+         
+         <div class="form-group mt-2">
+            <label for="body">Add comment:</label>
+            <textarea
+               name="body"
+               id="body"
+               class="form-control"
+               rows="3">{{old('body')}}</textarea>
+               @error('body')
+                  <p class="alert alert-danger">{{$errors->first('body')}}</p>
+               @enderror
+         </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-   </form>
+         <button type="submit" class="btn btn-primary">Submit</button>
+      </form>       
+   @endauth
 </div>
 
 @endsection

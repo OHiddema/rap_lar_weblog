@@ -14,6 +14,8 @@ class CommentController extends Controller
     // }
 
     public function destroy(Comment $comment) {
+        $this->authorize('update', $comment);
+
         $comment->delete();
         return redirect('/articles/'.$comment->article->id);
     }
@@ -28,10 +30,14 @@ class CommentController extends Controller
     }
 
     public function edit(Comment $comment) {
+        $this->authorize('update', $comment);
+
         return view('comments.edit', ['comment' => $comment]);
     }
 
     public function update(Comment $comment) {
+        $this->authorize('update', $comment);
+
         $comment->update($this->validateComment());
 
         return redirect('/articles/'.$comment->article->id);
