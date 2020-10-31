@@ -41,11 +41,7 @@ class ArticlesController extends Controller
 
     public function store() {
 
-        // because we have no authentication yet, we don't have an author,
-        // so we cannot use create yet, so we create author manually
-        // Article::create($this->validateArticle());
         $article = new Article($this->validateArticle());
-        // $article->user_id = 1;
         $article->user_id = auth()->user()->id;
         $article->save();
 
@@ -55,10 +51,14 @@ class ArticlesController extends Controller
     }
 
     public function edit(Article $article) {
+        $this->authorize('update', $article);
+
         return view('articles.edit', ['article' => $article, 'tags' => \App\Models\Tag::all()]);
     }
 
     public function update(Article $article) {
+        $this->authorize('update', $article);
+
         $article->update($this->validateArticle());
         $article->tags()->detach();
         $article->tags()->attach(request('tags'));
@@ -66,6 +66,8 @@ class ArticlesController extends Controller
     }
 
     public function destroy(Article $article) {
+        $this->authorize('update', $article);
+
         $article->delete();
         return redirect('/articles');
     }

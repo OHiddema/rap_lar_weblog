@@ -14,7 +14,7 @@
    </p>
    <p class="mt-2">{{$article->body}}</p>
 
-   @can('full-access-article', $article)
+   @can('update', $article)
       <div class="d-inline-block">
          <form action="/articles/{{$article->id}}" method="POST">
          @csrf

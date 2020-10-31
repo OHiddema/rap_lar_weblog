@@ -20,18 +20,19 @@ Route::get('/', function () {
    return view('home');
 });
 
-Route::get('/articles', 'ArticlesController@index');
-Route::post('/articles', 'ArticlesController@store');
-Route::get('/articles/create', 'ArticlesController@create');
-Route::get('/articles/{article}', 'ArticlesController@show');
-Route::get('/articles/{article}/edit', 'ArticlesController@edit');
-Route::put('/articles/{article}', 'ArticlesController@update');
-Route::delete('/articles/{article}', 'ArticlesController@destroy');
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/comments/{article}', 'CommentController@store');
-Route::get('/comments/{comment}/edit', 'CommentController@edit');
-Route::put('/comments/{comment}', 'CommentController@update');
-Route::delete('/comments/{comment}', 'CommentController@destroy');
+Auth::routes();
+
+Route::get('/articles', 'ArticlesController@index');
+Route::post('/articles', 'ArticlesController@store')->middleware('auth');
+Route::get('/articles/create', 'ArticlesController@create')->middleware('auth');
+Route::get('/articles/{article}', 'ArticlesController@show');
+Route::get('/articles/{article}/edit', 'ArticlesController@edit')->middleware('auth');
+Route::put('/articles/{article}', 'ArticlesController@update')->middleware('auth');
+Route::delete('/articles/{article}', 'ArticlesController@destroy')->middleware('auth');
+
+Route::post('/comments/{article}', 'CommentController@store')->middleware('auth');
+Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('auth');
+Route::put('/comments/{comment}', 'CommentController@update')->middleware('auth');
+Route::delete('/comments/{comment}', 'CommentController@destroy')->middleware('auth');

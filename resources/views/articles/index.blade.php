@@ -2,7 +2,9 @@
 
 @section('content')
 <button><a href="/home">Home</a></button><br>
-<button><a href="/articles/create">Create new article</a></button>
+@auth
+    <button><a href="/articles/create">Create new article</a></button>
+@endauth
 <h1>All articles {{$filter}}</h1>
 
 @forelse ($articles as $article)
