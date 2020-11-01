@@ -21,18 +21,22 @@ class ArticlesController extends Controller
     public function index() {
         if (request('tag')) {
             $tag = Tag::where('name', request('tag'))->firstOrFail();
+            // $articles = $tag->articles->sortByDesc('created_at');
             $articles = $tag->articles;
             $filter = $tag->articles->count() . " articles with tag: " . $tag->name;
         } 
         elseif (request('user')) {
             $user = User::where('id', request('user'))->firstOrFail();
+            // $articles = $user->articles->sortByDesc('created_at');
             $articles = $user->articles;
             $filter = $user->articles->count() . " articles by author: " . $user->name;
         }
         else {
-            $articles = Article::latest()->get();
+            // $articles = Article::latest()->get();
+            $articles = Article::all();
             $filter="";
         }
+        $articles = $articles->sortByDesc('created_at');
         return view('articles.index',['articles' => $articles, 'filter'=>$filter]);
     }
 
