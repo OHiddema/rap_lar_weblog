@@ -34,3 +34,5 @@ Route::post('/comments/{article}', 'CommentController@store')->middleware('auth'
 Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('auth');
 Route::put('/comments/{comment}', 'CommentController@update')->middleware('auth');
 Route::delete('/comments/{comment}', 'CommentController@destroy')->middleware('auth');
+
+Route::get('/dashboard', 'DashboardController@index');
