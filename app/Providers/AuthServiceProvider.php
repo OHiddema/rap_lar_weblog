@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function(\App\Models\User $user){
+            if ($user->role == "admin") { //Admin user
+                return true;
+            }
+        });
+
         // Oeps, deze ging al mee met de vorige commit...
         // Gate::define('full-access-article', function(\App\Models\User $user, \App\Models\Article $article){
         //     return $article->author->is($user);
