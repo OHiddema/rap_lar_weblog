@@ -36,7 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         //     return $article->author->is($user);
         // });
 
-        Gate::define('dashboard', function(\App\Models\User $user){
+        Gate::define('admin', function(\App\Models\User $user){
             return $user->role == 'admin';
         });
     }

@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-   @can('dashboard', Auth::user())
+   @can('admin', Auth::user())
       <h1>Dashboard</h1>
       <div class="container rounded border border-dark" style="background-color: rgb(180, 255, 199)">
-         <p>Total number of users: {{$users->count()}}</p>
+         <p><a href="/dashboard/users">Total number of users: {{$users->count()}}</a></p>
          Roles:
          <div class="container rounded border border-dark mb-1" style="background-color: rgb(180, 234, 255)">
             @foreach ($roles as $key => $value)

@@ -8,7 +8,7 @@ use DB;
 class DashboardController extends Controller
 {
     public function index(){
-        $this->authorize('dashboard', \Auth::user());
+        $this->authorize('admin', \Auth::user());
         $users = \App\Models\User::all();
         $articles = \App\Models\Article::all();
         $comments = \App\Models\Comment::all();

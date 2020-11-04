@@ -36,3 +36,9 @@ Route::put('/comments/{comment}', 'CommentController@update')->middleware('auth'
 Route::delete('/comments/{comment}', 'CommentController@destroy')->middleware('auth');
 
 Route::get('/dashboard', 'DashboardController@index');
+
+Route::get('/dashboard/users', 'UsersController@index');
+Route::post('/dashboard/users', 'UsersController@store');
+Route::get('/dashboard/users/{user}/edit', 'UsersController@edit');
+Route::put('/dashboard/users/{user}', 'UsersController@update');
+Route::delete('/dashboard/users/{user}', 'UsersController@destroy');

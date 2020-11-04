@@ -24,7 +24,7 @@
 
 @section('content')
 <a class="btn btn-primary" href="/articles">Articles</a>
-    @can('dashboard', Auth::user())
+    @can('admin', Auth::user())
         <a class="btn btn-primary" href="/dashboard">Dashboard</a>        
     @endcan
 @endsection
