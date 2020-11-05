@@ -30,4 +30,8 @@ class Article extends Model
     public function likes() {
         return $this->hasMany(Like::class);
     }
+
+    public function hasLiked () {
+        return $this->hasMany(Like::class)->where('user_id',auth()->user()->id);
+    }
 }

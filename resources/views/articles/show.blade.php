@@ -16,18 +16,18 @@
 
    @auth
       <div class="d-inline-block">
-      @if (\App\Models\Like::where('article_id',$article->id)->where('user_id',auth()->user()->id)->count() > 0)
-         <form action="/likes/{{$article->id}}" method="post">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-danger btn-sm" type="submit" title="delete">Unlike</button>
-         </form>
-      @else
-         <form action="/likes/{{$article->id}}" method="post">
-            @csrf
-            <button type="submit" class="btn btn-primary btn-sm">Like</button>
-         </form>          
-      @endif
+         @if ($article->hasLiked->count() > 0)
+            <form action="/likes/{{$article->id}}" method="post">
+               @csrf
+               @method('DELETE')
+               <button class="btn btn-danger btn-sm" type="submit" title="delete">Unlike</button>
+            </form>
+         @else
+            <form action="/likes/{{$article->id}}" method="post">
+               @csrf
+               <button type="submit" class="btn btn-primary btn-sm">Like</button>
+            </form>          
+         @endif
       </div>
    @endauth
    <div class="d-inline-block">This article has {{$article->likes->count()}} likes</div>
