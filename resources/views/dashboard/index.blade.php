@@ -4,35 +4,6 @@
    @can('admin', Auth::user())
       <h1>Dashboard</h1>
       <a class="btn btn-primary" href="/dashboard/users">Users</a>
-      {{-- <div class="container rounded border border-dark" style="background-color: rgb(180, 255, 199)">
-         <p><a href="/dashboard/users">Total number of users: {{$users->count()}}</a></p>
-         Roles:
-         <div class="container rounded border border-dark mb-1" style="background-color: rgb(180, 234, 255)">
-            @foreach ($roles as $key => $value)
-               <div>{{$key}}: {{$value}} </div>
-            @endforeach            
-         </div>
-      </div> --}}
-
-      <div class="container rounded border border-dark mt-2" style="background-color: rgb(180, 255, 199)">
-         <p>Total number of articles: {{$articles->count()}}</p>
-         Written by:
-         <div class="container rounded border border-dark mb-1" style="background-color: rgb(180, 234, 255)">
-            @foreach ($articles_per_user as $key => $value)
-               <div>{{$key}}: {{$value}} </div>
-            @endforeach            
-         </div>
-      </div>
-
-      <div class="container rounded border border-dark mt-2" style="background-color: rgb(180, 255, 199)">
-         <p>Total number of comments: {{$comments->count()}}</p>
-         Written by:
-         <div class="container rounded border border-dark mb-1" style="background-color: rgb(180, 234, 255)">
-            @foreach ($comments_per_user as $key => $value)
-               <div>{{$key}}: {{$value}} </div>
-            @endforeach            
-         </div>
-      </div>
-      @endcan
+   @endcan
 
 @endsection

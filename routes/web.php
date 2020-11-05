@@ -42,3 +42,6 @@ Route::post('/dashboard/users', 'UsersController@store');
 Route::get('/dashboard/users/{user}/edit', 'UsersController@edit');
 Route::put('/dashboard/users/{user}', 'UsersController@update');
 Route::delete('/dashboard/users/{user}', 'UsersController@destroy');
+
+Route::get('/dashboard/articles', 'DashboardArticlesController@index');
+
