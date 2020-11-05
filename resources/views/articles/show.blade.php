@@ -14,34 +14,45 @@
    </p>
    <p class="mt-2">{{$article->body}}</p>
 
-   @auth
-      <div class="d-inline-block">
-         @if ($article->hasLiked->count() > 0)
-            <form action="/likes/{{$article->id}}" method="post">
-               @csrf
-               @method('DELETE')
-               <button class="btn btn-danger btn-sm" type="submit" title="delete">Unlike</button>
-            </form>
-         @else
-            <form action="/likes/{{$article->id}}" method="post">
-               @csrf
-               <button type="submit" class="btn btn-primary btn-sm">Like</button>
-            </form>          
-         @endif
+   <div class="container">
+      <div class="row">
+         <div class="col-6">
+            <div>
+            @auth
+               <div class="d-inline-block">
+                  @if ($article->hasLiked->count() > 0)
+                     <form action="/likes/{{$article->id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm" type="submit" title="delete">Unlike</button>
+                     </form>
+                  @else
+                     <form action="/likes/{{$article->id}}" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                     </form>          
+                  @endif
+               </div>
+            @endauth
+            This article has {{$article->likes->count()}} likes
+            </div>
+         </div>         
+         <div class="col-6 text-right">
+            @can('update', $article)
+               <a class="btn btn-primary btn-sm" href="/articles/{{$article->id}}/edit">Edit</a>
+               <div class="d-inline-block">
+                  <form action="/articles/{{$article->id}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger btn-sm" type="submit" title="delete">Delete</button>
+                  </form>
+               </div>
+            @endcan
+         </div>         
       </div>
-   @endauth
-   <div class="d-inline-block">This article has {{$article->likes->count()}} likes</div>
+   </div>
 
-   @can('update', $article)
-      <a class="btn btn-primary btn-sm" href="/articles/{{$article->id}}/edit">Edit</a>
-      <div class="d-inline-block">
-         <form action="/articles/{{$article->id}}" method="POST">
-         @csrf
-         @method('DELETE')
-         <button class="btn btn-danger btn-sm" type="submit" title="delete">Delete</button>
-         </form>
-      </div>
-   @endcan
+
   
    @foreach ($article->comments as $comment)
       <div class="container rounded border border-dark mt-2 pt-1 pb-1" style="background-color: rgb(180, 255, 199)">
