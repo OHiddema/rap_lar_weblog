@@ -4,7 +4,23 @@
    @can('admin', Auth::user())
       <h1>Users</h1>
       <div class="container">
-         @foreach ($users as $user)
+         <div class="row border">
+            <div class="col-3 border font-weight-bold">
+               Name
+            </div>
+            <div class="col-3 border border font-weight-bold">
+               Email
+            </div>
+            <div class="col-1 border border font-weight-bold">
+               Role
+            </div>
+            {{-- <div class="col-3 border border font-weight-bold">
+               Created_at
+            </div> --}}
+            <div class="col-5 border border font-weight-bold">
+            </div>
+         </div>
+      @foreach ($users as $user)
             <div class="row border">
                <div class="col-3 border">
                   {{$user->name}}
@@ -29,7 +45,7 @@
                   </div>
                   <a class="btn btn-primary btn-sm" href="/articles/?user={{$user->id}}">Articles</a>
                </div>
-           </div>
+            </div>
          @endforeach
       </div>
    @endcan
