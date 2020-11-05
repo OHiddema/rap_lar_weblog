@@ -43,5 +43,5 @@ Route::get('/dashboard/users/{user}/edit', 'UsersController@edit');
 Route::put('/dashboard/users/{user}', 'UsersController@update');
 Route::delete('/dashboard/users/{user}', 'UsersController@destroy');
 
-Route::get('/dashboard/articles', 'DashboardArticlesController@index');
-
+Route::post('/likes/{article}', 'LikeController@store')->middleware('auth');
+Route::delete('/likes/{article}', 'LikeController@destroy')->middleware('auth');
