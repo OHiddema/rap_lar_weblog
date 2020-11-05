@@ -3,7 +3,8 @@
 @section('content')
    @can('admin', Auth::user())
       <h1>Dashboard</h1>
-      <div class="container rounded border border-dark" style="background-color: rgb(180, 255, 199)">
+      <a class="btn btn-primary" href="/dashboard/users">Users</a>
+      {{-- <div class="container rounded border border-dark" style="background-color: rgb(180, 255, 199)">
          <p><a href="/dashboard/users">Total number of users: {{$users->count()}}</a></p>
          Roles:
          <div class="container rounded border border-dark mb-1" style="background-color: rgb(180, 234, 255)">
@@ -11,7 +12,7 @@
                <div>{{$key}}: {{$value}} </div>
             @endforeach            
          </div>
-      </div>
+      </div> --}}
 
       <div class="container rounded border border-dark mt-2" style="background-color: rgb(180, 255, 199)">
          <p>Total number of articles: {{$articles->count()}}</p>

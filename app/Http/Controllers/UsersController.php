@@ -94,7 +94,9 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->authorize('admin', \Auth::user());
+        $user->delete();
+        return redirect('/dashboard/users');
     }
 
 }
