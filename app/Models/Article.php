@@ -32,6 +32,6 @@ class Article extends Model
     }
 
     public function hasLiked () {
-        return $this->hasMany(Like::class)->where('user_id',auth()->user()->id);
+        return $this->likes()->where('user_id',auth()->user()->id);
     }
 }
