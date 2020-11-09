@@ -35,6 +35,7 @@
                   {{date_format($user->created_at,"d/m/Y G:i:s")}}
                </div> --}}
                <div class="col-5 border">
+                  <a class="btn btn-primary btn-sm" href="/dashboard/users/{{$user->id}}">Show</a>
                   <a class="btn btn-primary btn-sm" href="/dashboard/users/{{$user->id}}/edit">Edit</a>
                   <div class="d-inline-block">
                      <form action="/dashboard/users/{{$user->id}}" method="POST">
@@ -43,7 +44,6 @@
                         <button class="btn btn-danger btn-sm" type="submit" title="delete">Delete</button>
                      </form>
                   </div>
-                  <a class="btn btn-primary btn-sm" href="/articles/?user={{$user->id}}">Articles</a>
                </div>
             </div>
          @endforeach

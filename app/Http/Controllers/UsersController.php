@@ -4,9 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use DB;
 
 class UsersController extends Controller
 {
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        $this->authorize('admin', \Auth::user());
+
+        $likes_received = DB::table('likes')
+            ->join('articles', 'likes.article_id', '=', 'articles.id')
+            ->where('articles.user_id','=',$user->id)
+            ->pluck('likes.id')
+            ->count();
+
+        return view('dashboard.users.show',['user' => $user, 'likes_received' => $likes_received]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,17 +56,6 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
     {
         //
     }
