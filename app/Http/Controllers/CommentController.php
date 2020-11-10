@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Article;
+use App\Models\User;
 
 class CommentController extends Controller
 {
@@ -12,6 +13,21 @@ class CommentController extends Controller
     // {
     //     $this->middleware('auth');
     // }
+
+    public function index() {
+        $this->authorize('admin', \Auth::user());
+        if (request('user')) {
+            $user = User::where('id', request('user'))->firstOrFail();
+            $comments = $user->comments;
+            $filter = $user->comments->count() . " comments by author: " . $user->name;
+        }
+        else {
+            $comments = Comment::all();
+            $filter="";
+        }
+        $comments = $comments->sortByDesc('created_at');
+        return view('comments.index',['comments' => $comments, 'filter'=>$filter]);
+    }
 
     public function destroy(Comment $comment) {
         $this->authorize('update', $comment);

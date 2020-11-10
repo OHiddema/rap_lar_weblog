@@ -30,6 +30,7 @@ Route::get('/articles/{article}/edit', 'ArticlesController@edit')->middleware('a
 Route::put('/articles/{article}', 'ArticlesController@update')->middleware('auth');
 Route::delete('/articles/{article}', 'ArticlesController@destroy')->middleware('auth');
 
+Route::get('/comments', 'CommentController@index')->middleware('auth');
 Route::post('/comments/{article}', 'CommentController@store')->middleware('auth');
 Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('auth');
 Route::put('/comments/{comment}', 'CommentController@update')->middleware('auth');
