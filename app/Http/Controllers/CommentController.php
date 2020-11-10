@@ -9,10 +9,6 @@ use App\Models\User;
 
 class CommentController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
     public function index() {
         $this->authorize('admin', \Auth::user());
@@ -37,6 +33,7 @@ class CommentController extends Controller
     }
 
     public function store(Article $article) {
+        $this->authorize('loggedIn');
         $comment = new Comment($this->validateComment());
         $comment->user_id = auth()->user()->id;
         $comment->article_id = $article->id;

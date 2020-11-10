@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class LikeController extends Controller
 {
     public function destroy(Article $article) {
-        // $this->authorize('update', $comment);
+        $this->authorize('loggedIn');
 
         // haal de like met article_id en user_id van auth user
         $like = Like::where([['article_id', $article->id],['user_id', auth()->user()->id]])->firstOrFail();
@@ -19,6 +19,8 @@ class LikeController extends Controller
     }
 
     public function store(Article $article) {
+        $this->authorize('loggedIn');
+
         $like = new Like();
         $like->user_id = auth()->user()->id;
         $like->article_id = $article->id;

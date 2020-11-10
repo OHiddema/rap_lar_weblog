@@ -9,10 +9,6 @@ use App\Models\User;
 
 class ArticlesController extends Controller
 {
-    // public function __construct()
-    // {(
-    //     $this->middleware('auth');
-    // }
 
     public function show(Article $article) {
         return view('articles.show', ['article'=>$article]);
@@ -41,11 +37,14 @@ class ArticlesController extends Controller
     }
 
     public function create() {
+        $this->authorize('loggedIn');
+
         // include all Tag data
         return view('articles.create',['tags' => \App\Models\Tag::all()]);
     }
 
     public function store() {
+        $this->authorize('loggedIn');
 
         $article = new Article($this->validateArticle());
         $article->user_id = auth()->user()->id;

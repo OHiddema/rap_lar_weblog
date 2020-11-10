@@ -22,24 +22,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+Route::resource('articles', ArticlesController::class);
 
-Route::get('/articles', 'ArticlesController@index');
-Route::post('/articles', 'ArticlesController@store')->middleware('auth');
-Route::get('/articles/create', 'ArticlesController@create')->middleware('auth');
-Route::get('/articles/{article}', 'ArticlesController@show');
-Route::get('/articles/{article}/edit', 'ArticlesController@edit')->middleware('auth');
-Route::put('/articles/{article}', 'ArticlesController@update')->middleware('auth');
-Route::delete('/articles/{article}', 'ArticlesController@destroy')->middleware('auth');
-
-Route::get('/comments', 'CommentController@index')->middleware('auth');
-Route::post('/comments/{article}', 'CommentController@store')->middleware('auth');
-Route::get('/comments/{comment}/edit', 'CommentController@edit')->middleware('auth');
-Route::put('/comments/{comment}', 'CommentController@update')->middleware('auth');
-Route::delete('/comments/{comment}', 'CommentController@destroy')->middleware('auth');
+// afwijkende route dus recourcefull routing niet mogelijk
+Route::get('/comments', 'CommentController@index');
+Route::post('/comments/{article}', 'CommentController@store');
+Route::get('/comments/{comment}/edit', 'CommentController@edit');
+Route::put('/comments/{comment}', 'CommentController@update');
+Route::delete('/comments/{comment}', 'CommentController@destroy');
 
 Route::get('/dashboard', 'DashboardController@index');
 
 Route::resource('dashboard/users', UsersController::class);
 
-Route::post('/likes/{article}', 'LikeController@store')->middleware('auth');
-Route::delete('/likes/{article}', 'LikeController@destroy')->middleware('auth');
+Route::post('/likes/{article}', 'LikeController@store');
+Route::delete('/likes/{article}', 'LikeController@destroy');
