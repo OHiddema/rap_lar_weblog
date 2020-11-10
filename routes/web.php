@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
+
 Route::get('/articles', 'ArticlesController@index');
 Route::post('/articles', 'ArticlesController@store')->middleware('auth');
 Route::get('/articles/create', 'ArticlesController@create')->middleware('auth');
@@ -38,12 +39,7 @@ Route::delete('/comments/{comment}', 'CommentController@destroy')->middleware('a
 
 Route::get('/dashboard', 'DashboardController@index');
 
-Route::get('/dashboard/users', 'UsersController@index');
-Route::post('/dashboard/users', 'UsersController@store');
-Route::get('/dashboard/users/{user}', 'UsersController@show');
-Route::get('/dashboard/users/{user}/edit', 'UsersController@edit');
-Route::put('/dashboard/users/{user}', 'UsersController@update');
-Route::delete('/dashboard/users/{user}', 'UsersController@destroy');
+Route::resource('dashboard/users', UsersController::class);
 
 Route::post('/likes/{article}', 'LikeController@store')->middleware('auth');
 Route::delete('/likes/{article}', 'LikeController@destroy')->middleware('auth');
