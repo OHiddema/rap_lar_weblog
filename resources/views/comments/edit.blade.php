@@ -2,7 +2,13 @@
 
 @section('content')
    <h1>Edit Comment</h1>
-   <form action="/comments/{{$comment->id}}" method="post">
+
+   @if (request('user'))
+      <form action="/comments/{{$comment->id}}/?user={{request('user')}}" method="post">
+   @else
+      <form action="/comments/{{$comment->id}}" method="post">
+   @endif
+
       @csrf
       @method('PUT')
          

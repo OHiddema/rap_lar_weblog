@@ -29,7 +29,12 @@ class CommentController extends Controller
         $this->authorize('update', $comment);
 
         $comment->delete();
-        return redirect('/articles/'.$comment->article->id);
+
+        if (request('user')){
+            return redirect('/comments/?user='.request('user'));
+        } else {
+            return redirect('/articles/'.$comment->article->id);
+        }
     }
 
     public function store(Article $article) {
@@ -53,7 +58,11 @@ class CommentController extends Controller
 
         $comment->update($this->validateComment());
 
-        return redirect('/articles/'.$comment->article->id);
+        if (request('user')){
+            return redirect('/comments/?user='.request('user'));
+        } else {
+            return redirect('/articles/'.$comment->article->id);
+        }
     }
 
     protected function validateComment()
