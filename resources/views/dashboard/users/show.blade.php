@@ -13,11 +13,11 @@
 
 <div class="container rounded border border-dark mt-2 pt-2 pb-2" style="background-color: rgb(180, 255, 199)">
    <h5 class="font-weight-bold">This user has:</h5>
-<div class="mt-2 mb-2">{{$user->articles->count()}} articles written
-   <a class="btn btn-primary btn-sm" href="/articles/?user={{$user->id}}">Show articles</a>
+<div class="mt-2 mb-2">
+   <a class="btn btn-primary btn-sm" href="/articles/?user={{$user->id}}">{{$user->articles->count()}} articles</a>
 </div>
-<div class="mt-2 mb-2">{{$user->comments->count()}} comments written
-   <a class="btn btn-primary btn-sm" href="/comments/?user={{$user->id}}">Show comments</a>
+<div class="mt-2 mb-2">
+   <a class="btn btn-primary btn-sm" href="/comments/?user={{$user->id}}">{{$user->comments->count()}} comments</a>
 </div>
 <div class="mt-2 mb-2">{{$user->likes->count()}} likes given</div>
 <div class="mt-2 mb-2">{{$likes_received}} likes received</div>         
