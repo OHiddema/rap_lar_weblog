@@ -7,7 +7,7 @@
    <h1>{{$article->title}}</h1>
    <p class="m-0"><a href="/articles/?user={{$article->author->id}}">
       @if ($article->author->image)
-         <img src="{{ $article->author->image }}" style="width: 40px; height: 40px; border-radius: 50%;">
+         <img class="profile-image" src="{{ $article->author->image }}">
       @endif
       {{$article->author->name}}</a></p> 
    <p class="m-0">
@@ -65,7 +65,7 @@
       <div class="container rounded border border-dark mt-2 pt-1 pb-1" style="background-color: rgb(180, 255, 199)">
          <p class="font-italic font-weight-bold">
             @if ($comment->author->image)
-               <img src="{{ asset($comment->author->image) }}" style="width: 40px; height: 40px; border-radius: 50%;">
+               <img class="profile-image" src="{{ asset($comment->author->image) }}">
             @endif
             {{$comment->author->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
          <p>{{$comment->body}}</p>

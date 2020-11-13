@@ -18,6 +18,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .profile-image{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }        
+    </style>
+
 </head>
 <body>
     <div id="app">
@@ -55,11 +65,11 @@
                                 </a> --}}
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if (auth()->user()->image)
-                                        <img src="{{ asset(auth()->user()->image) }}" style="width: 40px; height: 40px; border-radius: 50%;">
+                                        <img class="profile-image" src="{{ asset(auth()->user()->image) }}">
                                     @endif
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-                                
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('profile') }}">Profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
