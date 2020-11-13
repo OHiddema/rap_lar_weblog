@@ -61,11 +61,11 @@ class User extends Authenticatable
     }
 
     public function getCreatedAtAttribute($value) {
-        return date("d/m/Y G:i", strtotime($value));
+        return date(config('app.datetime_format'), strtotime($value));
     }
 
     public function getUpdatedAtAttribute($value) {
-        return date("d/m/Y G:i", strtotime($value));
+        return date(config('app.datetime_format'), strtotime($value));
     }
 
 }

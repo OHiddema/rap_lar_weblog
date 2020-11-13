@@ -36,7 +36,7 @@ class Article extends Model
     }
 
     public function getCreatedAtAttribute($value) {
-        return date("d/m/Y G:i", strtotime($value));
+        return date(config('app.datetime_format'), strtotime($value));
     }
 
 }
