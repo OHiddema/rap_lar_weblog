@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image',
         'role'
     ];
 
@@ -53,5 +54,9 @@ class User extends Authenticatable
 
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+
+    public function getImageAttribute() {
+        return $this->profile_image;
     }
 }

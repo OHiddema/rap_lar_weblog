@@ -37,3 +37,6 @@ Route::resource('dashboard/users', UsersController::class);
 
 Route::post('/likes/{article}', 'LikeController@store');
 Route::delete('/likes/{article}', 'LikeController@destroy');
+
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile/update', 'ProfileController@updateProfile')->name('profile.update');
