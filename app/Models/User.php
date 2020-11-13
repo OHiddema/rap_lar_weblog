@@ -59,4 +59,13 @@ class User extends Authenticatable
     public function getImageAttribute() {
         return $this->profile_image;
     }
+
+    public function getCreatedAtAttribute($value) {
+        return date("d/m/Y G:i", strtotime($value));
+    }
+
+    public function getUpdatedAtAttribute($value) {
+        return date("d/m/Y G:i", strtotime($value));
+    }
+
 }

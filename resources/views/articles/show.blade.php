@@ -67,8 +67,9 @@
             @if ($comment->author->image)
                <img class="profile-image" src="{{ asset($comment->author->image) }}">
             @endif
-            {{$comment->author->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p>
-         <p>{{$comment->body}}</p>
+            {{-- {{$comment->author->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p> --}}
+            {{$comment->author->name}}, {{$comment->created_at}}</p>
+            <p>{{$comment->body}}</p>
 
          @can('update', $comment)
             <a class="btn btn-primary btn-sm" href="/comments/{{$comment->id}}/edit">Edit</a>

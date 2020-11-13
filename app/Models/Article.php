@@ -34,4 +34,9 @@ class Article extends Model
     public function hasLiked () {
         return $this->likes()->where('user_id',auth()->user()->id);
     }
+
+    public function getCreatedAtAttribute($value) {
+        return date("d/m/Y G:i", strtotime($value));
+    }
+
 }

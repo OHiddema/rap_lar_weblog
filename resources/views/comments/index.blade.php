@@ -19,7 +19,8 @@
 
 @forelse ($comments as $comment)
     <div class="container rounded border border-dark mb-2 pb-1" style="background-color: rgb(180, 234, 255)">
-        <div class="font-weight-bold">{{date_format($comment->created_at,"d/m/Y G:i")}}</div>
+        {{-- <div class="font-weight-bold">{{date_format($comment->created_at,"d/m/Y G:i")}}</div> --}}
+        <div class="font-weight-bold">{{$comment->created_at}}</div>
         <div>{{ $comment->body}}</div>
 
         @if (request('user'))

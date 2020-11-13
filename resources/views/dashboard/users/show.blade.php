@@ -23,11 +23,11 @@
       </tr>
       <tr>
          <td>Created at:</td>
-         <td>{{date_format($user->created_at,"d/m/Y G:i")}}</td>
+         <td>{{$user->created_at}}</td>
       </tr>
       <tr>
          <td>Updated at:</td>
-         <td>{{date_format($user->updated_at,"d/m/Y G:i")}}</td>
+         <td>{{$user->updated_at}}</td>
       </tr>
    </tbody>
 </table>

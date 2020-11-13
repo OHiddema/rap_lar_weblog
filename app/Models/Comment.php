@@ -18,5 +18,9 @@ class Comment extends Model
     public function article() {
         return $this->belongsTo(Article::class);
     }
+    
+    public function getCreatedAtAttribute($value) {
+        return date("d/m/Y G:i", strtotime($value));
+    }
 
 }

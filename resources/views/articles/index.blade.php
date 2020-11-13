@@ -42,7 +42,7 @@
         <p class="font-italic mt-0 mb-0">
             Written by: 
             <a href="/articles/?user={{$article->author->id}}">{{$article->author->name}}</a>
-            , on: {{date_format($article->created_at,"d/m/Y G:i")}}</p> 
+            , on: {{$article->created_at}}</p> 
         <p class="font-italic mt-0 mb-0">
         tags:
         @foreach ($article->tags as $tag)
