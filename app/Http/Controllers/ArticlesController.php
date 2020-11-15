@@ -10,6 +10,49 @@ use App\Models\User;
 class ArticlesController extends Controller
 {
 
+    public function search() {
+        $users = User::all();
+        $tags = Tag::all();
+        $articles = Article::all();
+
+        if (request('tag')) {
+            $tag = Tag::where('id', request('tag'))->firstOrFail();
+            $articles = $tag->articles;
+        }
+
+        if (request('user')) {
+            $articles=$articles->where('user_id',request('user'));
+        }
+
+        if (request('dateAfter')) {
+            $dateAfter = date_create_from_format('Y-m-d', request('dateAfter'));
+
+            $articles = $articles->filter(function ($item) use($dateAfter){
+                $dateCreated = date_create_from_format('d/m/Y G:i', $item->created_at);
+                return $dateCreated > $dateAfter;
+            });
+        }
+
+        if (request('inbody')) {
+            $filter = request('inbody');
+            
+            $articles = $articles->filter(function ($item) use($filter){
+                return stristr($item->body, $filter) !== false;
+            });
+        }
+
+        $articles = $articles->sortByDesc('created_at');
+
+        return view('search',[
+            'users'=>$users,
+            'tags'=>$tags,
+            'articles'=>$articles,
+            'olduser'=>request('user'),
+            'oldtag'=>request('tag'),
+            'olddateAfter'=>request('dateAfter'),
+            'oldinbody'=>request('inbody')]);
+    }
+
     public function show(Article $article) {
         return view('articles.show', ['article'=>$article]);
     }
