@@ -68,7 +68,7 @@
                                 </a> --}}
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if (auth()->user()->image)
-                                        <img class="profile-image" src="{{ asset(auth()->user()->image) }}">
+                                        <img class="profile-image d-inline" src="{{ asset(auth()->user()->image) }}">
                                     @endif
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
