@@ -51,6 +51,13 @@ class ArticlesController extends Controller
         }
 
         $articles = $articles->sortByDesc('created_at');
+        $articles = $articles->paginate(3);
+        $customUri =
+            '?user='.request('user').
+            '&tag='.request('tag').
+            '&dateAfter='.request('dateAfter').
+            '&dateBefore='.request('dateBefore');
+        $articles->withPath($customUri);
 
         return view('search',[
             'users'=>$users,
@@ -73,19 +80,24 @@ class ArticlesController extends Controller
             $articles = $tag->articles;
             $filterType = "tag";
             $filterOn = $tag->name;
+            $customUri = "?tag=".request('tag');
         } 
         elseif (request('user')) {
             $user = User::where('id', request('user'))->firstOrFail();
             $articles = $user->articles;
             $filterType = "user";
             $filterOn = $user;
+            $customUri = "?user=".request('user');
         }
         else {
             $articles = Article::all();
             $filterType = "";
             $filterOn = "";
+            $customUri = "";
         }
         $articles = $articles->sortByDesc('created_at');
+        $articles = $articles->paginate(3);
+        $articles->withPath($customUri);
         $tags = Tag::all();
         $allArticlesCount = Article::all()->count();
         return view('articles.index',[

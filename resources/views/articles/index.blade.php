@@ -57,4 +57,6 @@
     <p>No articles found!</p>
 @endforelse
 
+{{ $articles->links() }}
+
 @endsection

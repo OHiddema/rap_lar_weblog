@@ -47,7 +47,7 @@
    <div class="container">
       <div class=row>
          <div class="col form-group">
-            <label for="dateAfter">Aricle not older than:</label>
+            <label for="dateAfter">Written after:</label>
             <input
                type="date"
                name="dateAfter"
@@ -56,7 +56,7 @@
                value="{{$olddateAfter}}">
          </div>
          <div class="col form-group">
-            <label for="dateBefore">Aricle not younger than:</label>
+            <label for="dateBefore">Written before:</label>
             <input
                type="date"
                name="dateBefore"
@@ -71,7 +71,7 @@
 
 </form>
 
-<h3>Result ({{$articles->count()}} articles):</h3>
+{{-- <h3>Result ({{$articles->count()}} articles):</h3> --}}
 
 @forelse ($articles as $article)
     <div class="container rounded border border-dark mt-2 pl-2 pr-2" style="background-color: rgb(180, 234, 255)">
@@ -92,5 +92,7 @@
 @empty
     <p>No articles found!</p>
 @endforelse
+
+{{ $articles->links() }}
 
 @endsection
