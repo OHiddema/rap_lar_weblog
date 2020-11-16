@@ -6,6 +6,7 @@
         @auth
             <a class="btn btn-primary" href="/articles/create">Create new article</a>
         @endauth
+        <a class="btn btn-primary" href="/search">Advanced search</a>
     </div>
     <div class="p-2 mb-2 border border-dark rounded" style="background-color: rgb(180, 255, 199)">
         <div class="d-inline-block mr-2">Filter:</div>

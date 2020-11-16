@@ -2,6 +2,7 @@
 
 @section('content')
 
+<a class="btn btn-primary" href="/articles">Back</a>
 <h3>Advanced article search</h3>
 <form action="/search" method="get">
 
@@ -43,14 +44,27 @@
          value="{{$oldinbody}}">
    </div>
 
-   <div class="form-group">
-      <label for="dateAfter">Aricle not older than:</label>
-      <input
-         type="date"
-         name="dateAfter"
-         id="dateAfter"
-         class="form-control"
-         value="{{$olddateAfter}}">
+   <div class="container">
+      <div class=row>
+         <div class="col form-group">
+            <label for="dateAfter">Aricle not older than:</label>
+            <input
+               type="date"
+               name="dateAfter"
+               id="dateAfter"
+               class="form-control"
+               value="{{$olddateAfter}}">
+         </div>
+         <div class="col form-group">
+            <label for="dateBefore">Aricle not younger than:</label>
+            <input
+               type="date"
+               name="dateBefore"
+               id="dateBefore"
+               class="form-control"
+               value="{{$olddateBefore}}">
+         </div>
+      </div>
    </div>
 
    <button type="submit" class="btn btn-primary mb-4">Submit</button>

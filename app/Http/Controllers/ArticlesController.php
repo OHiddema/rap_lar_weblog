@@ -33,6 +33,15 @@ class ArticlesController extends Controller
             });
         }
 
+        if (request('dateBefore')) {
+            $dateBefore = date_create_from_format('Y-m-d', request('dateBefore'));
+
+            $articles = $articles->filter(function ($item) use($dateBefore){
+                $dateCreated = date_create_from_format('d/m/Y G:i', $item->created_at);
+                return $dateCreated < $dateBefore;
+            });
+        }
+
         if (request('inbody')) {
             $filter = request('inbody');
             
@@ -49,6 +58,7 @@ class ArticlesController extends Controller
             'articles'=>$articles,
             'olduser'=>request('user'),
             'oldtag'=>request('tag'),
+            'olddateBefore'=>request('dateBefore'),
             'olddateAfter'=>request('dateAfter'),
             'oldinbody'=>request('inbody')]);
     }
