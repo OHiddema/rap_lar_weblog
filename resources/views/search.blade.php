@@ -2,9 +2,12 @@
 
 @section('content')
 
+
 <a class="btn btn-primary" href="/articles">Back</a>
-<h3>Advanced article search</h3>
-<form action="/search" method="get">
+
+<button id="showAdvSearch" class="btn btn-primary">Show advanced search options</button>
+
+<form  id="advSearchForm" action="/search" method="get">
 
    <div class="form-group">
       <label for="user">Choose an author:</label>
