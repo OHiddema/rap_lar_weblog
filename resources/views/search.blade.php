@@ -93,6 +93,6 @@
     <p>No articles found!</p>
 @endforelse
 
-{{ $articles->links() }}
+{{$articles->links("pagination::bootstrap-4")}}
 
 @endsection
