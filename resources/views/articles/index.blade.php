@@ -9,7 +9,7 @@
         <a id="showAdvSearch" class="btn btn-primary">Show advanced search options</a>
     </div>
 
-    <form  id="advSearchForm" action="/articles" method="get">
+    <form  id="advSearchForm" class="p-2 rounded border border-dark" action="/articles" method="get" style="background-color: rgb(180, 234, 255)">
     
        <div class="form-group">
           <label for="user">Choose an author:</label>
@@ -40,7 +40,7 @@
        </div>
     
        <div class="form-group">
-          <label for="inbody">Word or phrase in article:</label>
+          <label for="inbody">Word or phrase in title, excerpt or article (case sensitive!):</label>
           <input
              type="text"
              name="inbody"
@@ -52,7 +52,7 @@
        <div class="container">
           <div class=row>
              <div class="col form-group">
-                <label for="dateAfter">Written after:</label>
+                <label for="dateAfter">Written after or on:</label>
                 <input
                    type="date"
                    name="dateAfter"
@@ -72,11 +72,14 @@
           </div>
        </div>
     
-       <button type="submit" class="btn btn-primary mb-4">Submit</button>
+       <button type="submit" class="btn btn-primary">Submit</button>
     
     </form>
     
-<p>{{$articleCount}} articles found:</p>
+<div class="mt-2 mb-2">{{$articleCount}} articles found:</div>
+
+{{$articles->links("pagination::bootstrap-4")}}
+
 @forelse ($articles as $article)
     <div class="container rounded border border-dark mb-2 pl-2 pr-2" style="background-color: rgb(180, 234, 255)">
         <h3><a href="/articles/{{$article->id}}">{{ $article->title}}</a></h3>

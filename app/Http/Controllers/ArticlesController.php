@@ -50,13 +50,16 @@ class ArticlesController extends Controller
             $filter = request('inbody');
             
             $articles = $articles->filter(function ($item) use($filter){
-                return stristr($item->body, $filter) !== false;
+                return
+                (stristr($item->title, $filter) !== false) ||
+                (stristr($item->excerpt, $filter) !== false) ||
+                (stristr($item->body, $filter) !== false);
             });
         }
 
         $articleCount = $articles->count();
         $articles = $articles->sortByDesc('created_at');
-        $articles = $articles->paginate(3);
+        $articles = $articles->paginate(10);
         $customUri =
             '?user='.request('user').
             '&tag='.request('tag').
