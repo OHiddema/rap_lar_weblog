@@ -23,7 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::resource('articles', ArticlesController::class);
-Route::get('/search', 'ArticlesController@search');
 
 // afwijkende route dus recourcefull routing niet mogelijk
 Route::get('/comments', 'CommentController@index');

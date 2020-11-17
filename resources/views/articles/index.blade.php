@@ -6,37 +6,77 @@
         @auth
             <a class="btn btn-primary" href="/articles/create">Create new article</a>
         @endauth
-        <a class="btn btn-primary" href="/search">Advanced search</a>
-    </div>
-    <div class="p-2 mb-2 border border-dark rounded" style="background-color: rgb(180, 255, 199)">
-        <div class="d-inline-block mr-2">Filter:</div>
-        <div class="d-inline-block">
-            <div class="d-inline-block mr-2">
-                <a class="btn @if ($filterType == "")
-                    btn-success
-                @else
-                    btn-primary
-                @endif 
-                btn-sm" href="/articles">All articles ({{$allArticlesCount}})</a>
-            </div>
-            <div class="d-inline-block mr-2">
-                @foreach ($tags as $tag)
-                    <a class="btn @if ($filterType == "tag" && $filterOn == $tag->name)
-                        btn-success
-                    @else
-                        btn-primary
-                    @endif 
-                    btn-sm" href="/articles/?tag={{$tag->name}}">{{$tag->name}} ({{$tag->articles->count()}})</a>        
-                @endforeach
-            </div>
-            <div class="d-inline-block">
-                @if ($filterType == "user")
-                    <button class="btn btn-sm btn-success" disabled="disabled">{{$filterOn->name}} ({{$filterOn->articles->count()}})</button>
-                @endif
-            </div>
-        </div>            
+        <a id="showAdvSearch" class="btn btn-primary">Show advanced search options</a>
     </div>
 
+    <form  id="advSearchForm" action="/articles" method="get">
+    
+       <div class="form-group">
+          <label for="user">Choose an author:</label>
+          <select name="user" id="user" class="form-control">
+             <option value="0">All users</option>
+             @foreach ($users as $user)
+                <option value="{{$user->id}}"
+                @if ($user->id == $olduser)
+                   selected
+                @endif"
+                >{{$user->name}}</option>
+             @endforeach
+          </select>
+       </div>
+       
+       <div class="form-group">
+          <label for="tag">Choose a tag:</label>
+          <select name="tag" id="tag" class="form-control">
+             <option value="0">All tags</option>
+             @foreach ($tags as $tag)
+                <option value="{{$tag->id}}"
+                @if ($tag->id == $oldtag)
+                   selected
+                @endif"
+                >{{$tag->name}}</option>
+             @endforeach
+          </select> 
+       </div>
+    
+       <div class="form-group">
+          <label for="inbody">Word or phrase in article:</label>
+          <input
+             type="text"
+             name="inbody"
+             id="inbody"
+             class="form-control"
+             value="{{$oldinbody}}">
+       </div>
+    
+       <div class="container">
+          <div class=row>
+             <div class="col form-group">
+                <label for="dateAfter">Written after:</label>
+                <input
+                   type="date"
+                   name="dateAfter"
+                   id="dateAfter"
+                   class="form-control"
+                   value="{{$olddateAfter}}">
+             </div>
+             <div class="col form-group">
+                <label for="dateBefore">Written before:</label>
+                <input
+                   type="date"
+                   name="dateBefore"
+                   id="dateBefore"
+                   class="form-control"
+                   value="{{$olddateBefore}}">
+             </div>
+          </div>
+       </div>
+    
+       <button type="submit" class="btn btn-primary mb-4">Submit</button>
+    
+    </form>
+    
+<p>{{$articleCount}} articles found:</p>
 @forelse ($articles as $article)
     <div class="container rounded border border-dark mb-2 pl-2 pr-2" style="background-color: rgb(180, 234, 255)">
         <h3><a href="/articles/{{$article->id}}">{{ $article->title}}</a></h3>
@@ -47,7 +87,7 @@
         <p class="font-italic mt-0 mb-0">
         tags:
         @foreach ($article->tags as $tag)
-            <a href="/articles/?tag={{$tag->name}}">{{$tag->name}}</a>
+            <a href="/articles/?tag={{$tag->id}}">{{$tag->name}}</a>
         @endforeach
         </p>
 

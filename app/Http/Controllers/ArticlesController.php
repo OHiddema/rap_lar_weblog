@@ -10,7 +10,11 @@ use App\Models\User;
 class ArticlesController extends Controller
 {
 
-    public function search() {
+    public function show(Article $article) {
+        return view('articles.show', ['article'=>$article]);
+    }
+
+    public function index() {
         $users = User::all();
         $tags = Tag::all();
         $articles = Article::all();
@@ -50,6 +54,7 @@ class ArticlesController extends Controller
             });
         }
 
+        $articleCount = $articles->count();
         $articles = $articles->sortByDesc('created_at');
         $articles = $articles->paginate(3);
         $customUri =
@@ -59,53 +64,16 @@ class ArticlesController extends Controller
             '&dateBefore='.request('dateBefore');
         $articles->withPath($customUri);
 
-        return view('search',[
+        return view('articles.index',[
             'users'=>$users,
             'tags'=>$tags,
             'articles'=>$articles,
+            'articleCount'=>$articleCount,
             'olduser'=>request('user'),
             'oldtag'=>request('tag'),
             'olddateBefore'=>request('dateBefore'),
             'olddateAfter'=>request('dateAfter'),
             'oldinbody'=>request('inbody')]);
-    }
-
-    public function show(Article $article) {
-        return view('articles.show', ['article'=>$article]);
-    }
-
-    public function index() {
-        if (request('tag')) {
-            $tag = Tag::where('name', request('tag'))->firstOrFail();
-            $articles = $tag->articles;
-            $filterType = "tag";
-            $filterOn = $tag->name;
-            $customUri = "?tag=".request('tag');
-        } 
-        elseif (request('user')) {
-            $user = User::where('id', request('user'))->firstOrFail();
-            $articles = $user->articles;
-            $filterType = "user";
-            $filterOn = $user;
-            $customUri = "?user=".request('user');
-        }
-        else {
-            $articles = Article::all();
-            $filterType = "";
-            $filterOn = "";
-            $customUri = "";
-        }
-        $articles = $articles->sortByDesc('created_at');
-        $articles = $articles->paginate(3);
-        $articles->withPath($customUri);
-        $tags = Tag::all();
-        $allArticlesCount = Article::all()->count();
-        return view('articles.index',[
-            'articles' => $articles,
-            'tags' => $tags,
-            'allArticlesCount' => $allArticlesCount, 
-            'filterType' => $filterType, 
-            'filterOn' => $filterOn]);
     }
 
     public function create() {
