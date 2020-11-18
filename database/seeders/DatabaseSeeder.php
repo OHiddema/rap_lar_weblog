@@ -35,5 +35,18 @@ class DatabaseSeeder extends Seeder
                 'user_id' => \App\Models\User::inRandomOrder()->first()->id
             ]);
         }
+
+        // change article's created_at from now to in the last year
+        $end = strtotime(now());
+        $start = $end-365*24*3600;
+
+        foreach ($articles as $article) {
+            $timestamp = mt_rand($start, $end);
+            DB::table('articles')
+                ->where(['id' => $article->id])
+                ->update(['created_at' => date('Y-m-d G;i', $timestamp)]);
+        }
+
+
     }
 }
