@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Traits\UploadTrait;
+// use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
-    use UploadTrait;
+    // use UploadTrait;
 
     public function __construct()
     {
