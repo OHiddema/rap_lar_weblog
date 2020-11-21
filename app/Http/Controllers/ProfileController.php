@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Storage;
+
 
 // ************************************
 use Illuminate\Support\Str;
@@ -41,16 +43,10 @@ class ProfileController extends Controller
         if ($request->has('profile_image')) {
             // Get image file
             $image = $request->file('profile_image');
-            // Make a image name based on user name and current timestamp
-            $name = Str::slug($request->input('name')).'_'.time();
-            // Define folder path
-            $folder = '/uploads/images/';
-            // Make a file path where image will be stored [ folder path + file name + file extension]
-            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
             // Upload image
-            $this->uploadOne($image, $folder, 'public', $name);
-            // Set user profile image path in database to filePath
-            $user->profile_image = $filePath;
+            $result = Storage::cloud()->putfile('/', $image);
+            // Put filename in database
+            $user->profile_image = $result;
         }
         // Persist user record to database
         $user->save();

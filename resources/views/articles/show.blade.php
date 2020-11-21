@@ -7,7 +7,8 @@
    <h1>{{$article->title}}</h1>
    <p class="m-0"><a href="/articles/?user={{$article->author->id}}">
       @if ($article->author->image)
-         <img class="profile-image" src="{{ $article->author->image }}">
+         {{-- <img class="profile-image" src="{{ $article->author->image }}"> --}}
+         <img class="profile-image" src="{{Storage::cloud()->temporaryUrl($article->author->image, now()->addMinutes(5))}}">
       @endif
       {{$article->author->name}}</a></p> 
    <p class="m-0">
@@ -65,7 +66,8 @@
       <div class="container rounded border border-dark mt-2 pt-1 pb-1" style="background-color: rgb(180, 255, 199)">
          <p class="font-italic font-weight-bold">
             @if ($comment->author->image)
-               <img class="profile-image" src="{{ asset($comment->author->image) }}">
+               {{-- <img class="profile-image" src="{{ asset($comment->author->image) }}"> --}}
+               <img class="profile-image" src="{{Storage::cloud()->temporaryUrl($comment->author->image, now()->addMinutes(5))}}">
             @endif
             {{-- {{$comment->author->name}}, {{ date_format($comment->created_at,"d/m/Y G:i")}}</p> --}}
             {{$comment->author->name}}, {{$comment->created_at}}</p>
