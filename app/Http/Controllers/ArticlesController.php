@@ -17,7 +17,8 @@ class ArticlesController extends Controller
     public function index() {
         $users = User::all();
         $tags = Tag::all();
-        $articles = Article::all();
+        // $articles = Article::all();
+        $articles = Article::orderBy('created_at','desc');
 
         if (request('tag')) {
             $tag = Tag::where('id', request('tag'))->firstOrFail();
@@ -58,7 +59,7 @@ class ArticlesController extends Controller
         }
 
         $articleCount = $articles->count();
-        $articles = $articles->sortByDesc('created_at');
+        // $articles = $articles->sortByDesc('created_at');
         $articles = $articles->paginate(10);
         $customUri =
             '?user='.request('user').
