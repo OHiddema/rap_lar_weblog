@@ -17,8 +17,7 @@ class ArticlesController extends Controller
     public function index() {
         $users = User::all();
         $tags = Tag::all();
-        // $articles = Article::all();
-        $articles = Article::orderBy('created_at','desc');
+        $articles = Article::all();
 
         if (request('tag')) {
             $tag = Tag::where('id', request('tag'))->firstOrFail();
@@ -58,8 +57,14 @@ class ArticlesController extends Controller
             });
         }
 
+        $articles = $articles->map(function ($item) {
+            $item->extrafield = date_create_from_format('d/m/Y G:i', $item->created_at);
+            return $item;
+        });
+
         $articleCount = $articles->count();
-        // $articles = $articles->sortByDesc('created_at');
+        $articles = $articles->sortByDesc('extrafield');
+
         $articles = $articles->paginate(10);
         $customUri =
             '?user='.request('user').
